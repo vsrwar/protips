@@ -9,6 +9,6 @@ public class Bet : Base
     public decimal Value { get; set; } = 0;
     public decimal Result { get; set; } = 0;
     public decimal Odd { get; set; }
-    [JsonIgnore] protected int StrategyId { get; set; }
+    [JsonIgnore] public int StrategyId { get; set; }
     public BetStrategy BetStrategy { get; set; }
 }

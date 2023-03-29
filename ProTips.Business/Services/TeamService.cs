@@ -1,13 +1,14 @@
 ﻿using ProTips.Business.Services.Interfaces;
 using ProTips.Entity.Models;
+using ProTips.Entity.Repository;
 using ProTips.Entity.Repository.Interfaces;
 
 namespace ProTips.Business.Services;
 
 public class TeamService : ITeamService
 {
-    private readonly IRepository<Team> _teamRepository;
-    public TeamService(IRepository<Team> teamRepository)
+    private readonly Repository<Team> _teamRepository;
+    public TeamService(Repository<Team> teamRepository)
     {
         _teamRepository = teamRepository;
     }

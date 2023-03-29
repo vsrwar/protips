@@ -1,6 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc.Versioning;
+using Microsoft.EntityFrameworkCore;
 using ProTips.Business.Services;
 using ProTips.Business.Services.Interfaces;
+using ProTips.Entity.Database;
 using ProTips.Entity.Models;
 using ProTips.Entity.Repository;
 using ProTips.Entity.Repository.Interfaces;
@@ -9,6 +11,11 @@ namespace ProTips.API.Configuration;
 
 public static class ServicesExtensionMethod
 {
+    public static void AddMySqlContext(this IServiceCollection services, string connectionString)
+    {
+        services.AddDbContext<MySqlContext>(options =>
+            options.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString)));
+    }
     public static void AddServices(this IServiceCollection services)
     {
         services.AddScoped<ITeamService, TeamService>();
@@ -16,7 +23,7 @@ public static class ServicesExtensionMethod
     
     public static void AddRepositories(this IServiceCollection services)
     {
-        services.AddTransient<IRepository<Team>, TeamRepository>();
+        services.AddTransient<Repository<Team>, TeamRepository>();
     }
     
     public static void AddVersioning(this IServiceCollection services)

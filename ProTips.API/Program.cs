@@ -10,6 +10,7 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 builder.Services.AddVersioning();
+builder.Services.AddMySqlContext(builder.Configuration.GetSection("ConnectionStrings")["MySql"]);
 builder.Services.AddServices();
 builder.Services.AddRepositories();
 

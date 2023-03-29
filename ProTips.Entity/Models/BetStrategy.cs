@@ -2,5 +2,5 @@
 
 public class BetStrategy : Base
 {
-    public string Parameters { get; set; }
+    public string Description { get; set; }
 }

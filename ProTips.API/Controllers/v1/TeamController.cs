@@ -28,9 +28,9 @@ public class TeamController : ControllerBase
     }
     
     /// <summary>
-    /// A list a single team
+    /// Return a single team
     /// </summary>
-    /// <returns>A teams from database that matches id</returns>
+    /// <returns>A team from database that matches id</returns>
     /// <param name="id">The id of the team to return</param>
     [HttpGet("{id:int}")]
     public async Task<ActionResult<List<Team>>> Get(int id)
