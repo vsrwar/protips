@@ -10,17 +10,20 @@ services:
       MYSQL_USER: "vinicius"
       MYSQL_PASSWORD: "Senh@123!"
     ports:
-        - "3306:3306"
-        - "33060:33060"
+      - "3306:3306"
+      - "33060:33060"
+    hostname: "mysql"
   api:
     container_name: "app"
     build:
       context: .
       dockerfile: Dockerfile
     ports:
-        - "5000:80"
-        - "5001:443"
+      - "5000:80"
+      - "5001:443"
     restart: always
+    environment:
+      - MYSQL_CONNECTION_STRING=Server=mysql;Database=protips;Uid=vinicius;Pwd=Senh@123!
     depends_on:
       - db
   portainer:

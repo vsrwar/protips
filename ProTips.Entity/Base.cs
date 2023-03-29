@@ -1,11 +1,12 @@
-﻿namespace ProTips.Entity;
+﻿using System.Text.Json.Serialization;
 
-public class Base
+namespace ProTips.Entity;
+
+public abstract class Base
 {
     public int Id { get; set; }
     public string Name { get; set; }
-    public DateTime CreationDate { get; set; } = DateTime.UtcNow;
-    public DateTime? DeletedDate { get; set; }
-    
-    public bool IsDeleted => DeletedDate.HasValue;
+    [JsonIgnore] public DateTime CreationDate { get; set; } = DateTime.UtcNow;
+    [JsonIgnore] public DateTime? DeletedDate { get; set; }
+    [JsonIgnore] public bool IsDeleted => DeletedDate.HasValue;
 }

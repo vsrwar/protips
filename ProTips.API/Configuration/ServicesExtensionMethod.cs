@@ -5,7 +5,6 @@ using ProTips.Business.Services.Interfaces;
 using ProTips.Entity.Database;
 using ProTips.Entity.Models;
 using ProTips.Entity.Repository;
-using ProTips.Entity.Repository.Interfaces;
 
 namespace ProTips.API.Configuration;
 
@@ -14,16 +13,21 @@ public static class ServicesExtensionMethod
     public static void AddMySqlContext(this IServiceCollection services, string connectionString)
     {
         services.AddDbContext<MySqlContext>(options =>
-            options.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString)));
+            options.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString))
+        );
     }
     public static void AddServices(this IServiceCollection services)
     {
         services.AddScoped<ITeamService, TeamService>();
+        services.AddScoped<ICountryService, CountryService>();
+        services.AddScoped<ILeagueService, LeagueService>();
     }
     
     public static void AddRepositories(this IServiceCollection services)
     {
         services.AddTransient<Repository<Team>, TeamRepository>();
+        services.AddTransient<Repository<Country>, CountryRepository>();
+        services.AddTransient<Repository<League>, LeagueRepository>();
     }
     
     public static void AddVersioning(this IServiceCollection services)

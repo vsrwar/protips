@@ -1,6 +1,8 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using System.Linq.Expressions;
+using Microsoft.EntityFrameworkCore;
 using ProTips.Entity.Database;
 using ProTips.Entity.Repository.Interfaces;
+using ProTips.Entity.Utils;
 
 namespace ProTips.Entity.Repository;
 
@@ -20,11 +22,20 @@ public abstract class Repository<T> : IRepository<T> where T : Base
         return model;
     }
 
-    public async Task<List<T>> GetAsync() =>
-        await Context.Set<T>().AsNoTracking().ToListAsync();
+    public async Task<List<T>> GetAsync(params string[] includes) =>
+        await Context.Set<T>()
+            .Where(x => x.DeletedDate.HasValue == false)
+            .IncludeIf(includes.Any(), includes)
+            .AsNoTracking()
+            .ToListAsync();
 
-    public async Task<T> GetAsync(int id) =>
-        await Context.Set<T>().AsNoTracking().FirstOrDefaultAsync(x => x.Id == id);
+    public async Task<T> GetAsync(int id, params string[] includes) =>
+        await Context.Set<T>()
+            .IncludeIf(includes.Any(), includes)
+            .AsNoTracking()
+            .FirstOrDefaultAsync(x => 
+                x.Id == id
+                && x.DeletedDate.HasValue == false);
 
     public async Task<T> UpdateAsync(T model)
     {

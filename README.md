@@ -2,23 +2,23 @@
 ## To run Entity Framework db migrations:
 if dotnet-ef already installed but not updated run:
 ```shell
-  dotnet tool update --global dotnet-ef
+dotnet tool update --global dotnet-ef
 ```
 else
 ```shell
-  dotnet tool install --global dotnet-ef
+dotnet tool install --global dotnet-ef
 ```
     
 ```shell
-  dotnet ef --startup-project ./ProTips.API/ --project ./ProTips.Entity/ migrations add CreateTables
+dotnet ef --startup-project ./ProTips.API/ --project ./ProTips.Entity/ migrations add CreateTables
 ```
 ```shell
-  dotnet ef --startup-project ./ProTips.API/ --project ./ProTips.Entity/ database update
+dotnet ef --startup-project ./ProTips.API/ --project ./ProTips.Entity/ database update
 ```
 
 ## To revert:
 ```shell
-  dotnet ef --startup-project ./ProTips.API/ --project ./ProTips.Entity/ database update 0
+dotnet ef --startup-project ./ProTips.API/ --project ./ProTips.Entity/ database update 0
 ```
 ```shell
 dotnet ef --startup-project ./ProTips.API/ --project ./ProTips.Entity/ migrations remove

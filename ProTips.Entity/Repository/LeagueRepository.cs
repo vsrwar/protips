@@ -4,9 +4,9 @@ using ProTips.Entity.Models;
 
 namespace ProTips.Entity.Repository;
 
-public class TeamRepository : Repository<Team>
+public class LeagueRepository : Repository<League>
 {
-    public TeamRepository(MySqlContext context) : base(context)
+    public LeagueRepository(MySqlContext context) : base(context)
     {
     }
 }

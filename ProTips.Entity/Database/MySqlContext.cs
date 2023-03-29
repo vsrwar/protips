@@ -72,9 +72,9 @@ public class MySqlContext : DbContext
         
         modelBuilder.Entity<League>()
             .HasMany<Team>(x => x.Teams)
-            .WithOne(x => x.League)
+            .WithOne()
             .HasForeignKey(x => x.LeagueId);
-
+        
         #endregion
         
         #region Game
@@ -120,7 +120,7 @@ public class MySqlContext : DbContext
         
         modelBuilder.Entity<Country>()
             .HasMany<Team>(x => x.Teams)
-            .WithOne(x => x.Country)
+            .WithOne()
             .HasForeignKey(x => x.CountryId);
 
         #endregion
