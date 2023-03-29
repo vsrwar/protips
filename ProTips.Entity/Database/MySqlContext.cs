@@ -89,6 +89,7 @@ public class MySqlContext : DbContext
             mb.Property(x => x.HomeId).HasColumnName("homeId");
             mb.Property(x => x.AwayId).HasColumnName("awayId");
             mb.Property(x => x.ResultId).HasColumnName("resultId");
+            mb.Property(x => x.Date).HasColumnName("date");
         });
         
         modelBuilder.Entity<Game>()
