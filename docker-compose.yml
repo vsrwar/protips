@@ -1,0 +1,36 @@
+﻿version: "3.7"
+services:
+  db:
+    image: mysql
+    container_name: "mysql"
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: "1q2w3e!Q@W#E"
+      MYSQL_DATABASE: "protips"
+      MYSQL_USER: "vinicius"
+      MYSQL_PASSWORD: "Senh@123!"
+    ports:
+        - "3306:3306"
+        - "33060:33060"
+  api:
+    container_name: "app"
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+        - "5000:80"
+        - "5001:443"
+    restart: always
+    depends_on:
+      - db
+  portainer:
+    image: portainer/portainer-ce
+    container_name: "Portainer"
+    restart: always
+    ports:
+      - "8000:8000"
+      - "9000:9000"
+      - "9443:9443"
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - /var/lib/docker/volumes:/var/lib/docker/volumes

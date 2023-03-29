@@ -1,0 +1,28 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProTips.API", "ProTips.API\ProTips.API.csproj", "{C037B6B3-338F-4612-9286-20CCDEF3005D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProTips.Entity", "ProTips.Entity\ProTips.Entity.csproj", "{5BD59074-46C0-4F02-976F-26ACCE6F29E6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProTips.Business", "ProTips.Business\ProTips.Business.csproj", "{D9B21B94-A39C-4F11-A7D9-129BCC1DEA05}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{C037B6B3-338F-4612-9286-20CCDEF3005D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C037B6B3-338F-4612-9286-20CCDEF3005D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C037B6B3-338F-4612-9286-20CCDEF3005D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C037B6B3-338F-4612-9286-20CCDEF3005D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5BD59074-46C0-4F02-976F-26ACCE6F29E6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5BD59074-46C0-4F02-976F-26ACCE6F29E6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5BD59074-46C0-4F02-976F-26ACCE6F29E6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5BD59074-46C0-4F02-976F-26ACCE6F29E6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D9B21B94-A39C-4F11-A7D9-129BCC1DEA05}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D9B21B94-A39C-4F11-A7D9-129BCC1DEA05}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D9B21B94-A39C-4F11-A7D9-129BCC1DEA05}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D9B21B94-A39C-4F11-A7D9-129BCC1DEA05}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
