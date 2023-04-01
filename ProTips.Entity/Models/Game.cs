@@ -8,7 +8,7 @@ public class Game : Base
     public Team Home { get; set; }
     [JsonIgnore] public int AwayId { get; set; }
     public Team Away { get; set; }
-    [JsonIgnore] public int ResultId { get; set; }
+    [JsonIgnore] public int? ResultId { get; set; }
     public Result Result { get; set; }
     public DateTime Date { get; set; }
 }

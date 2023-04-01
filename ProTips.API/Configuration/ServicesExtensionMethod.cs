@@ -21,6 +21,10 @@ public static class ServicesExtensionMethod
         services.AddScoped<ITeamService, TeamService>();
         services.AddScoped<ICountryService, CountryService>();
         services.AddScoped<ILeagueService, LeagueService>();
+        services.AddScoped<IResultService, ResultService>();
+        services.AddScoped<IGameService, GameService>();
+        services.AddScoped<IBetStrategyService, BetStrategyService>();
+        services.AddScoped<IBetService, BetService>();
     }
     
     public static void AddRepositories(this IServiceCollection services)
@@ -28,6 +32,10 @@ public static class ServicesExtensionMethod
         services.AddTransient<Repository<Team>, TeamRepository>();
         services.AddTransient<Repository<Country>, CountryRepository>();
         services.AddTransient<Repository<League>, LeagueRepository>();
+        services.AddTransient<Repository<Result>, ResultRepository>();
+        services.AddTransient<Repository<Game>, GameRepository>();
+        services.AddTransient<Repository<BetStrategy>, BetStrategyRepository>();
+        services.AddTransient<Repository<Bet>, BetRepository>();
     }
     
     public static void AddVersioning(this IServiceCollection services)

@@ -9,7 +9,7 @@ public class MySqlContext : DbContext
     {
     }
 
-    public DbSet<Team?> Teams { get; set; }
+    public DbSet<Team> Teams { get; set; }
     public DbSet<Result> Results { get; set; }
     public DbSet<League> Leagues { get; set; }
     public DbSet<Game> Games { get; set; }
@@ -51,10 +51,13 @@ public class MySqlContext : DbContext
             mb.ToTable("results");
             mb.HasKey(x => x.Id);
             mb.Property(x => x.Name).HasColumnName("name").IsRequired();
+            mb.Property(x => x.GameId).HasColumnName("gameId");
             mb.Property(x => x.CreationDate).HasColumnName("creationDate");
             mb.Property(x => x.DeletedDate).HasColumnName("deletedDate");
-            mb.Property(x => x.GoalsHome).HasColumnName("goalsHome");
-            mb.Property(x => x.GoalsAway).HasColumnName("goalsAway");
+            mb.Property(x => x.HalfTimeGoalsHome).HasColumnName("halfTimeGoalsHome");
+            mb.Property(x => x.HalfTimeGoalsAway).HasColumnName("halfTimeGoalsAway");
+            mb.Property(x => x.FullTimeGoalsHome).HasColumnName("fullTimeGoalsHome");
+            mb.Property(x => x.FullTimeGoalsAway).HasColumnName("fullTimeGoalsAway");
         });
 
         #endregion
@@ -153,6 +156,7 @@ public class MySqlContext : DbContext
             mb.Property(x => x.Odd).HasColumnName("odd").HasPrecision(2);
             mb.Property(x => x.StrategyId).HasColumnName("strategyId");
             mb.Property(x => x.GameId).HasColumnName("gameId");
+            mb.Property(x => x.Winner).HasColumnName("winner");
         });
         
         modelBuilder.Entity<Bet>()

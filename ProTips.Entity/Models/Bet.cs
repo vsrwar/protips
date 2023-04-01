@@ -8,6 +8,7 @@ public class Bet : Base
     public Game Game { get; set; }
     public decimal Value { get; set; } = 0;
     public decimal Result { get; set; } = 0;
+    public bool? Winner { get; set; }
     public decimal Odd { get; set; }
     [JsonIgnore] public int StrategyId { get; set; }
     public BetStrategy BetStrategy { get; set; }
