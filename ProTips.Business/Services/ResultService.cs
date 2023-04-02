@@ -3,19 +3,20 @@ using ProTips.Business.Dtos;
 using ProTips.Business.Services.Interfaces;
 using ProTips.Entity.Models;
 using ProTips.Entity.Repository;
+using ProTips.Entity.Repository.Interfaces;
 
 namespace ProTips.Business.Services;
 
-public class ResultService : IResultService
+public class ResultService : IService<Result>
 {
-    private readonly Repository<Result> _resultRepository;
+    private readonly IRepository<Result> _resultRepository;
 
-    public ResultService(Repository<Result> resultRepository)
+    public ResultService(IRepository<Result> resultRepository)
     {
         _resultRepository = resultRepository;
     }
 
-    public async Task<Result> CreateAsync(ResultDto model)
+    public async Task<Result> CreateAsync(dynamic model)
     {
         var result = ObjectMapper.Mapper.Map<Result>(model);
         await _resultRepository.CreateAsync(result);

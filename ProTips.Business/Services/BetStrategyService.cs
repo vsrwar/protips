@@ -3,19 +3,20 @@ using ProTips.Business.Dtos;
 using ProTips.Business.Services.Interfaces;
 using ProTips.Entity.Models;
 using ProTips.Entity.Repository;
+using ProTips.Entity.Repository.Interfaces;
 
 namespace ProTips.Business.Services;
 
-public class BetStrategyService : IBetStrategyService
+public class BetStrategyService : IService<BetStrategy>
 {
-    private readonly Repository<BetStrategy> _betStrategyRepository;
+    private readonly IRepository<BetStrategy> _betStrategyRepository;
 
-    public BetStrategyService(Repository<BetStrategy> betStrategyRepository)
+    public BetStrategyService(IRepository<BetStrategy> betStrategyRepository)
     {
         _betStrategyRepository = betStrategyRepository;
     }
 
-    public async Task<BetStrategy> CreateAsync(BetStrategy model)
+    public async Task<BetStrategy> CreateAsync(dynamic model)
     {
         await _betStrategyRepository.CreateAsync(model);
         return model;

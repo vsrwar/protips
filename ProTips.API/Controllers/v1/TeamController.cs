@@ -11,9 +11,9 @@ namespace ProTips.API.Controllers.v1;
 [Produces("application/json")]
 public class TeamController : ControllerBase
 {
-    private readonly ITeamService _teamService;
+    private readonly IService<Team> _teamService;
     
-    public TeamController(ITeamService teamService)
+    public TeamController(IService<Team> teamService)
     {
         _teamService = teamService;
     }

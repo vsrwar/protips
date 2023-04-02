@@ -11,9 +11,9 @@ namespace ProTips.API.Controllers.v1;
 [Produces("application/json")]
 public class GameController : ControllerBase
 {
-    private readonly IGameService _gameService;
+    private readonly IService<Game> _gameService;
     
-    public GameController(IGameService gameService)
+    public GameController(IService<Game> gameService)
     {
         _gameService = gameService;
     }

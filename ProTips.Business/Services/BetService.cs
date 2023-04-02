@@ -3,19 +3,20 @@ using ProTips.Business.Dtos;
 using ProTips.Business.Services.Interfaces;
 using ProTips.Entity.Models;
 using ProTips.Entity.Repository;
+using ProTips.Entity.Repository.Interfaces;
 
 namespace ProTips.Business.Services;
 
-public class BetService : IBetService
+public class BetService : IService<Bet>
 {
-    private readonly Repository<Bet> _betRepository;
+    private readonly IRepository<Bet> _betRepository;
 
-    public BetService(Repository<Bet> betRepository)
+    public BetService(IRepository<Bet> betRepository)
     {
         _betRepository = betRepository;
     }
 
-    public async Task<Bet> CreateAsync(BetDto model)
+    public async Task<Bet> CreateAsync(dynamic model)
     {
         var bet = ObjectMapper.Mapper.Map<Bet>(model);
         await _betRepository.CreateAsync(bet);

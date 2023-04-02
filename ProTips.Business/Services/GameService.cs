@@ -3,19 +3,20 @@ using ProTips.Business.Dtos;
 using ProTips.Business.Services.Interfaces;
 using ProTips.Entity.Models;
 using ProTips.Entity.Repository;
+using ProTips.Entity.Repository.Interfaces;
 
 namespace ProTips.Business.Services;
 
-public class GameService : IGameService
+public class GameService : IService<Game>
 {
-    private readonly Repository<Game> _gameRepository;
+    private readonly IRepository<Game> _gameRepository;
 
-    public GameService(Repository<Game> gameRepository)
+    public GameService(IRepository<Game> gameRepository)
     {
         _gameRepository = gameRepository;
     }
 
-    public async Task<Game> CreateAsync(GameDto model)
+    public async Task<Game> CreateAsync(dynamic model)
     {
         var game = ObjectMapper.Mapper.Map<Game>(model);
         await _gameRepository.CreateAsync(game);

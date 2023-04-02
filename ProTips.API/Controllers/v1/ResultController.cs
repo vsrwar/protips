@@ -11,9 +11,9 @@ namespace ProTips.API.Controllers.v1;
 [Produces("application/json")]
 public class ResultController : ControllerBase
 {
-    private readonly IResultService _resultService;
+    private readonly IService<Result> _resultService;
     
-    public ResultController(IResultService resultService)
+    public ResultController(IService<Result> resultService)
     {
         _resultService = resultService;
     }

@@ -11,9 +11,9 @@ namespace ProTips.API.Controllers.v1;
 [Produces("application/json")]
 public class LeagueController : ControllerBase
 {
-    private readonly ILeagueService _leagueService;
+    private readonly IService<League> _leagueService;
     
-    public LeagueController(ILeagueService leagueService)
+    public LeagueController(IService<League> leagueService)
     {
         _leagueService = leagueService;
     }

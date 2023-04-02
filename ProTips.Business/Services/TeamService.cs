@@ -3,18 +3,19 @@ using ProTips.Business.Dtos;
 using ProTips.Business.Services.Interfaces;
 using ProTips.Entity.Models;
 using ProTips.Entity.Repository;
+using ProTips.Entity.Repository.Interfaces;
 
 namespace ProTips.Business.Services;
 
-public class TeamService : ITeamService
+public class TeamService : IService<Team>
 {
-    private readonly Repository<Team> _teamRepository;
-    public TeamService(Repository<Team> teamRepository)
+    private readonly IRepository<Team> _teamRepository;
+    public TeamService(IRepository<Team> teamRepository)
     {
         _teamRepository = teamRepository;
     }
 
-    public Task<Team> CreateAsync(TeamDto model)
+    public Task<Team> CreateAsync(dynamic model)
     {
         var team = ObjectMapper.Mapper.Map<Team>(model);
         return _teamRepository.CreateAsync(team);

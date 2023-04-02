@@ -3,19 +3,20 @@ using ProTips.Business.Dtos;
 using ProTips.Business.Services.Interfaces;
 using ProTips.Entity.Models;
 using ProTips.Entity.Repository;
+using ProTips.Entity.Repository.Interfaces;
 
 namespace ProTips.Business.Services;
 
-public class CountryService : ICountryService
+public class CountryService : IService<Country>
 {
-    private readonly Repository<Country> _countryRepository;
+    private readonly IRepository<Country> _countryRepository;
 
-    public CountryService(Repository<Country> countryRepository)
+    public CountryService(IRepository<Country> countryRepository)
     {
         _countryRepository = countryRepository;
     }
 
-    public async Task<Country> CreateAsync(CountryDto model)
+    public async Task<Country> CreateAsync(dynamic model)
     {
         var country = ObjectMapper.Mapper.Map<Country>(model);
         await _countryRepository.CreateAsync(country);

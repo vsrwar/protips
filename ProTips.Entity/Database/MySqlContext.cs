@@ -60,6 +60,11 @@ public class MySqlContext : DbContext
             mb.Property(x => x.FullTimeGoalsAway).HasColumnName("fullTimeGoalsAway");
         });
 
+        modelBuilder.Entity<Result>()
+            .HasOne<Game>(x => x.Game)
+            .WithOne(x => x.Result)
+            .HasForeignKey<Result>(x => x.GameId);
+        
         #endregion
 
         #region League
@@ -151,9 +156,9 @@ public class MySqlContext : DbContext
             mb.Property(x => x.Name).HasColumnName("name").IsRequired();
             mb.Property(x => x.CreationDate).HasColumnName("creationDate");
             mb.Property(x => x.DeletedDate).HasColumnName("deletedDate");
-            mb.Property(x => x.Value).HasColumnName("value").HasPrecision(2);
-            mb.Property(x => x.Result).HasColumnName("result").HasPrecision(2);
-            mb.Property(x => x.Odd).HasColumnName("odd").HasPrecision(2);
+            mb.Property(x => x.Value).HasColumnName("value").HasPrecision(5, 2);
+            mb.Property(x => x.Result).HasColumnName("result").HasPrecision(5, 2);
+            mb.Property(x => x.Odd).HasColumnName("odd").HasPrecision(5, 2);
             mb.Property(x => x.StrategyId).HasColumnName("strategyId");
             mb.Property(x => x.GameId).HasColumnName("gameId");
             mb.Property(x => x.Winner).HasColumnName("winner");
