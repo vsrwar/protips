@@ -7,16 +7,16 @@ using ProTips.Entity.Repository.Interfaces;
 
 namespace ProTips.Business.Services;
 
-public class BetStrategyService : IService<BetStrategy>
+public class BetStrategyService : IBetStrategyService
 {
-    private readonly IRepository<BetStrategy> _betStrategyRepository;
+    private readonly IBetStrategyRepository _betStrategyRepository;
 
-    public BetStrategyService(IRepository<BetStrategy> betStrategyRepository)
+    public BetStrategyService(IBetStrategyRepository betStrategyRepository)
     {
         _betStrategyRepository = betStrategyRepository;
     }
 
-    public async Task<BetStrategy> CreateAsync(dynamic model)
+    public async Task<BetStrategy> CreateAsync(BetStrategy model)
     {
         await _betStrategyRepository.CreateAsync(model);
         return model;

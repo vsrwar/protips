@@ -11,9 +11,9 @@ namespace ProTips.API.Controllers.v1;
 [Produces("application/json")]
 public class BetStrategyController : ControllerBase
 {
-    private readonly IService<BetStrategy> _betStrategyService;
+    private readonly IBetStrategyService _betStrategyService;
     
-    public BetStrategyController(IService<BetStrategy> betStrategyService)
+    public BetStrategyController(IBetStrategyService betStrategyService)
     {
         _betStrategyService = betStrategyService;
     }

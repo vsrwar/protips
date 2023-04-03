@@ -7,19 +7,25 @@ using ProTips.Entity.Repository.Interfaces;
 
 namespace ProTips.Business.Services;
 
-public class ResultService : IService<Result>
+public class ResultService : IResultService
 {
-    private readonly IRepository<Result> _resultRepository;
+    private readonly IResultRepository _resultRepository;
+    private readonly IGameService _gameService;
 
-    public ResultService(IRepository<Result> resultRepository)
+    public ResultService(
+        IResultRepository resultRepository,
+        IGameService gameService)
     {
         _resultRepository = resultRepository;
+        _gameService = gameService;
     }
 
-    public async Task<Result> CreateAsync(dynamic model)
+    public async Task<Result> CreateAsync(ResultDto model)
     {
         var result = ObjectMapper.Mapper.Map<Result>(model);
         await _resultRepository.CreateAsync(result);
+        await _gameService.UpdateResultAsync(model.GameId, result.Id);
+        
         return result;
     }
 

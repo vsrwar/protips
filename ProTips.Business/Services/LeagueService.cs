@@ -7,16 +7,16 @@ using ProTips.Entity.Repository.Interfaces;
 
 namespace ProTips.Business.Services;
 
-public class LeagueService : IService<League>
+public class LeagueService : ILeagueService
 {
-    private readonly IRepository<League> _leagueRepository;
+    private readonly ILeagueRepository _leagueRepository;
 
-    public LeagueService(IRepository<League> leagueRepository)
+    public LeagueService(ILeagueRepository leagueRepository)
     {
         _leagueRepository = leagueRepository;
     }
 
-    public async Task<League> CreateAsync(dynamic model)
+    public async Task<League> CreateAsync(LeagueDto model)
     {
         var league = ObjectMapper.Mapper.Map<League>(model);
         await _leagueRepository.CreateAsync(league);

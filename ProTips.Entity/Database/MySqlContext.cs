@@ -33,15 +33,6 @@ public class MySqlContext : DbContext
             mb.Property(x => x.CountryId).HasColumnName("countryId");
         });
 
-        modelBuilder.Entity<Team>()
-            .HasOne<League>()
-            .WithMany(x => x.Teams)
-            .HasForeignKey(x => x.LeagueId);
-        modelBuilder.Entity<Team>()
-            .HasOne<Country>()
-            .WithMany()
-            .HasForeignKey(x => x.CountryId);
-
         #endregion
         
         #region Result
@@ -59,11 +50,6 @@ public class MySqlContext : DbContext
             mb.Property(x => x.FullTimeGoalsHome).HasColumnName("fullTimeGoalsHome");
             mb.Property(x => x.FullTimeGoalsAway).HasColumnName("fullTimeGoalsAway");
         });
-
-        modelBuilder.Entity<Result>()
-            .HasOne<Game>(x => x.Game)
-            .WithOne(x => x.Result)
-            .HasForeignKey<Result>(x => x.GameId);
         
         #endregion
 
@@ -110,8 +96,12 @@ public class MySqlContext : DbContext
             .HasForeignKey(x => x.AwayId);        
         modelBuilder.Entity<Game>()
             .HasOne<Result>(x => x.Result)
-            .WithOne(x => x.Game)
-            .HasForeignKey<Game>(x => x.ResultId);
+            .WithOne()
+            .HasForeignKey<Result>(x => x.GameId);
+        modelBuilder.Entity<Game>()
+            .HasMany<Link>(x => x.Links)
+            .WithOne()
+            .HasForeignKey(x => x.GameId);
         
         #endregion
         
@@ -128,6 +118,10 @@ public class MySqlContext : DbContext
         
         modelBuilder.Entity<Country>()
             .HasMany<Team>(x => x.Teams)
+            .WithOne()
+            .HasForeignKey(x => x.CountryId);
+        modelBuilder.Entity<Country>()
+            .HasMany<League>(x => x.Leagues)
             .WithOne()
             .HasForeignKey(x => x.CountryId);
 
@@ -156,12 +150,13 @@ public class MySqlContext : DbContext
             mb.Property(x => x.Name).HasColumnName("name").IsRequired();
             mb.Property(x => x.CreationDate).HasColumnName("creationDate");
             mb.Property(x => x.DeletedDate).HasColumnName("deletedDate");
-            mb.Property(x => x.Value).HasColumnName("value").HasPrecision(5, 2);
-            mb.Property(x => x.Result).HasColumnName("result").HasPrecision(5, 2);
-            mb.Property(x => x.Odd).HasColumnName("odd").HasPrecision(5, 2);
+            mb.Property(x => x.Value).HasColumnName("value").HasColumnType("DECIMAL(7, 2)");
+            mb.Property(x => x.Result).HasColumnName("result").HasColumnType("DECIMAL(7, 2)");
+            mb.Property(x => x.Odd).HasColumnName("odd").HasColumnType("DECIMAL(4, 2)");
             mb.Property(x => x.StrategyId).HasColumnName("strategyId");
             mb.Property(x => x.GameId).HasColumnName("gameId");
             mb.Property(x => x.Winner).HasColumnName("winner");
+            mb.Property(x => x.UserId).HasColumnName("userId");
         });
         
         modelBuilder.Entity<Bet>()
@@ -173,6 +168,85 @@ public class MySqlContext : DbContext
             .WithMany()
             .HasForeignKey(x => x.GameId);
 
+        #endregion
+
+        #region Link
+
+        modelBuilder.Entity<Link>(mb =>
+        {
+            mb.ToTable("links");
+            mb.HasKey(x => x.Id);
+            mb.Property(x => x.Name).HasColumnName("name").IsRequired();
+            mb.Property(x => x.CreationDate).HasColumnName("creationDate");
+            mb.Property(x => x.DeletedDate).HasColumnName("deletedDate");
+            mb.Property(x => x.Url).HasColumnName("url");
+            mb.Property(x => x.GameId).HasColumnName("gameId");
+        });
+
+        #endregion
+        
+        #region User
+        
+        modelBuilder.Entity<User>(mb =>
+        {
+            mb.ToTable("users");
+            mb.HasKey(x => x.Id);
+            mb.Property(x => x.Name).HasColumnName("name").IsRequired();
+            mb.Property(x => x.CreationDate).HasColumnName("creationDate");
+            mb.Property(x => x.DeletedDate).HasColumnName("deletedDate");
+            mb.Property(x => x.Email).HasColumnName("email");
+            mb.Property(x => x.Password).HasColumnName("password");
+            mb.Property(x => x.Birth).HasColumnName("birth");
+            mb.Property(x => x.WalletId).HasColumnName("walletId");
+        });
+        
+        modelBuilder.Entity<User>()
+            .HasOne<Wallet>(x => x.Wallet)
+            .WithOne()
+            .HasForeignKey<Wallet>(x => x.UserId);
+        modelBuilder.Entity<User>()
+            .HasMany<Bet>(x => x.Bets)
+            .WithOne()
+            .HasForeignKey(x => x.UserId);
+        modelBuilder.Entity<User>()
+            .HasIndex(x => x.Email)
+            .IsUnique();
+        #endregion
+        
+        #region Wallet
+        
+        modelBuilder.Entity<Wallet>(mb =>
+        {
+            mb.ToTable("wallets");
+            mb.HasKey(x => x.Id);
+            mb.Property(x => x.Name).HasColumnName("name").IsRequired();
+            mb.Property(x => x.CreationDate).HasColumnName("creationDate");
+            mb.Property(x => x.DeletedDate).HasColumnName("deletedDate");
+            mb.Property(x => x.Balance).HasColumnName("balance").HasColumnType("DECIMAL(7, 2)");
+            mb.Property(x => x.UserId).HasColumnName("userId");
+        });
+        
+        modelBuilder.Entity<Wallet>()
+            .HasMany<WalletTransaction>(x => x.Transactions)
+            .WithOne()
+            .HasForeignKey(x => x.WalletId);
+        
+        #endregion
+        
+        #region WalletTransaction
+        
+        modelBuilder.Entity<WalletTransaction>(mb =>
+        {
+            mb.ToTable("walletTransactions");
+            mb.HasKey(x => x.Id);
+            mb.Property(x => x.Name).HasColumnName("name").IsRequired();
+            mb.Property(x => x.CreationDate).HasColumnName("creationDate");
+            mb.Property(x => x.DeletedDate).HasColumnName("deletedDate");
+            mb.Property(x => x.Amount).HasColumnName("amount").HasColumnType("DECIMAL(7, 2)");
+            mb.Property(x => x.WalletId).HasColumnName("walletId");
+            mb.Property(x => x.Operation).HasColumnName("operation");
+        });
+        
         #endregion
     }
 }

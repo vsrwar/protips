@@ -14,29 +14,37 @@ public static class ServicesExtensionMethod
     public static void AddMySqlContext(this IServiceCollection services, string connectionString)
     {
         services.AddDbContext<MySqlContext>(options =>
-            options.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString))
+            options.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString)).EnableDetailedErrors()
         );
     }
     public static void AddServices(this IServiceCollection services)
     {
-        services.AddScoped<IService<Team>, TeamService>();
-        services.AddScoped<IService<Country>, CountryService>();
-        services.AddScoped<IService<League>, LeagueService>();
-        services.AddScoped<IService<Result>, ResultService>();
-        services.AddScoped<IService<Game>, GameService>();
-        services.AddScoped<IService<BetStrategy>, BetStrategyService>();
-        services.AddScoped<IService<Bet>, BetService>();
+        services.AddScoped<ITeamService, TeamService>();
+        services.AddScoped<ICountryService, CountryService>();
+        services.AddScoped<ILeagueService, LeagueService>();
+        services.AddScoped<IResultService, ResultService>();
+        services.AddScoped<IGameService, GameService>();
+        services.AddScoped<IBetStrategyService, BetStrategyService>();
+        services.AddScoped<IBetService, BetService>();
+        services.AddScoped<ILinkService, LinkService>();
+        services.AddScoped<IUserService, UserService>();
+        services.AddScoped<IWalletService, WalletService>();
+        services.AddScoped<IWalletTransactionService, WalletTransactionService>();
     }
     
     public static void AddRepositories(this IServiceCollection services)
     {
-        services.AddTransient<IRepository<Team>, TeamRepository>();
-        services.AddTransient<IRepository<Country>, CountryRepository>();
-        services.AddTransient<IRepository<League>, LeagueRepository>();
-        services.AddTransient<IRepository<Result>, ResultRepository>();
-        services.AddTransient<IRepository<Game>, GameRepository>();
-        services.AddTransient<IRepository<BetStrategy>, BetStrategyRepository>();
-        services.AddTransient<IRepository<Bet>, BetRepository>();
+        services.AddTransient<ITeamRepository, TeamRepository>();
+        services.AddTransient<ICountryRepository, CountryRepository>();
+        services.AddTransient<ILeagueRepository, LeagueRepository>();
+        services.AddTransient<IResultRepository, ResultRepository>();
+        services.AddTransient<IGameRepository, GameRepository>();
+        services.AddTransient<IBetStrategyRepository, BetStrategyRepository>();
+        services.AddTransient<IBetRepository, BetRepository>();
+        services.AddTransient<ILinkRepository, LinkRepository>();
+        services.AddTransient<IUserRepository, UserRepository>();
+        services.AddTransient<IWalletRepository, WalletRepository>();
+        services.AddTransient<IWalletTransactionRepository, WalletTransactionRepository>();
     }
     
     public static void AddVersioning(this IServiceCollection services)

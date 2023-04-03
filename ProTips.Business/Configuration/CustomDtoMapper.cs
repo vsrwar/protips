@@ -29,5 +29,8 @@ public class CustomDtoMapper : Profile
         
         CreateMap<BetDto, Bet>()
             .ReverseMap();
+        
+        CreateMap<UserDto, User>()
+            .ReverseMap();
     }
 }

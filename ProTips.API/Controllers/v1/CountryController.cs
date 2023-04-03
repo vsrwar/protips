@@ -11,9 +11,9 @@ namespace ProTips.API.Controllers.v1;
 [Produces("application/json")]
 public class CountryController : ControllerBase
 {
-    private readonly IService<Country> _countryService;
+    private readonly ICountryService _countryService;
     
-    public CountryController(IService<Country> countryService)
+    public CountryController(ICountryService countryService)
     {
         _countryService = countryService;
     }

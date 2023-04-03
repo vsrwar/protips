@@ -7,16 +7,16 @@ using ProTips.Entity.Repository.Interfaces;
 
 namespace ProTips.Business.Services;
 
-public class CountryService : IService<Country>
+public class CountryService : ICountryService
 {
-    private readonly IRepository<Country> _countryRepository;
+    private readonly ICountryRepository _countryRepository;
 
-    public CountryService(IRepository<Country> countryRepository)
+    public CountryService(ICountryRepository countryRepository)
     {
         _countryRepository = countryRepository;
     }
 
-    public async Task<Country> CreateAsync(dynamic model)
+    public async Task<Country> CreateAsync(CountryDto model)
     {
         var country = ObjectMapper.Mapper.Map<Country>(model);
         await _countryRepository.CreateAsync(country);

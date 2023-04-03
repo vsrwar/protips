@@ -7,15 +7,15 @@ using ProTips.Entity.Repository.Interfaces;
 
 namespace ProTips.Business.Services;
 
-public class TeamService : IService<Team>
+public class TeamService : ITeamService
 {
-    private readonly IRepository<Team> _teamRepository;
-    public TeamService(IRepository<Team> teamRepository)
+    private readonly ITeamRepository _teamRepository;
+    public TeamService(ITeamRepository teamRepository)
     {
         _teamRepository = teamRepository;
     }
 
-    public Task<Team> CreateAsync(dynamic model)
+    public Task<Team> CreateAsync(TeamDto model)
     {
         var team = ObjectMapper.Mapper.Map<Team>(model);
         return _teamRepository.CreateAsync(team);

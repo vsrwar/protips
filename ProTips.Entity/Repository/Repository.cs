@@ -22,6 +22,13 @@ public abstract class Repository<T> : IRepository<T> where T : Base
         return model;
     }
 
+    public async Task<List<T>> CreateRangeAsync(List<T> model)
+    {
+        await Context.AddRangeAsync(model);
+        await Context.SaveChangesAsync();
+        return model;
+    }
+
     public async Task<List<T>> GetAsync(params string[] includes) =>
         await Context.Set<T>()
             .Where(x => x.DeletedDate.HasValue == false)

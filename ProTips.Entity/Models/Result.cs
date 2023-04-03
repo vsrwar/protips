@@ -10,5 +10,4 @@ public class Result : Base
     public int FullTimeGoalsHome { get; set; }
     public int FullTimeGoalsAway { get; set; }
     [JsonIgnore] public int GameId { get; set; }
-    public Game Game { get; set; }
 }

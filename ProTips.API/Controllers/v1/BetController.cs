@@ -11,9 +11,9 @@ namespace ProTips.API.Controllers.v1;
 [Produces("application/json")]
 public class BetController : ControllerBase
 {
-    private readonly IService<Bet> _betService;
+    private readonly IBetService _betService;
     
-    public BetController(IService<Bet> betService)
+    public BetController(IBetService betService)
     {
         _betService = betService;
     }
@@ -79,5 +79,19 @@ public class BetController : ControllerBase
     {
         var deleted = await _betService.DeleteAsync(id);
         return Ok(deleted);
+    }
+        
+    /// <summary>
+    /// Sets if the bet was winner or not
+    /// </summary>
+    /// <param name="winner">bool winner</param>
+    /// <returns>Bet</returns>
+    [HttpPost("{id:int}/winner/{winner:bool}")]
+    public async Task<ActionResult<Bet>> Winner(
+        [FromRoute] int id,
+        [FromRoute] bool winner)
+    {
+        var bet = await _betService.WinnerAsync(id, winner);
+        return Ok(bet);
     }
 }
