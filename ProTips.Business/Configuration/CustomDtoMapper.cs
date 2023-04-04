@@ -8,13 +8,28 @@ public class CustomDtoMapper : Profile
 {
     public CustomDtoMapper()
     {
-        CreateMap<TeamDto, Team>()
+        CreateMap<BetDto, Bet>()
+            .ReverseMap();
+
+        CreateMap<BetStrategyDto, BetStrategy>()
             .ReverseMap();
 
         CreateMap<CountryDto, Country>()
             .ReverseMap();
 
+        CreateMap<CurrencyDto, Currency>()
+            .ReverseMap();
+
+        CreateMap<GameDto, Game>()
+            .ReverseMap();
+
         CreateMap<LeagueDto, League>()
+            .ReverseMap();
+
+        CreateMap<LinkDto, Link>()
+            .ReverseMap();
+
+        CreateMap<PreLiveDto, PreLive>()
             .ReverseMap();
 
         CreateMap<ResultDto, Result>()
@@ -24,12 +39,12 @@ public class CustomDtoMapper : Profile
             .ForMember(x => x.FullTimeGoalsAway, y => y.MapFrom(z => z.FullTimeGols.Away))
             .ReverseMap();
         
-        CreateMap<GameDto, Game>()
+        CreateMap<TeamDto, Team>()
             .ReverseMap();
-        
-        CreateMap<BetDto, Bet>()
+
+        CreateMap<TipDto, Tip>()
             .ReverseMap();
-        
+
         CreateMap<UserDto, User>()
             .ReverseMap();
     }

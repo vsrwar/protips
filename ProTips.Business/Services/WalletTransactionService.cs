@@ -15,9 +15,10 @@ public class WalletTransactionService : IWalletTransactionService
         _walletTransactionRepository = walletTransactionRepository;
     }
 
-    public Task<WalletTransaction> CreateAsync(WalletTransaction model)
+    public async Task<WalletTransaction> CreateAsync(WalletTransaction model)
     {
-        return _walletTransactionRepository.CreateAsync(model);
+        var walletTransaction =  await _walletTransactionRepository.CreateAsync(model);
+        return walletTransaction;
     }
 
     public async Task<List<WalletTransaction>> GetAsync()

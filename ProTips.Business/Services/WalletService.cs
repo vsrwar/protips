@@ -22,9 +22,10 @@ public class WalletService : IWalletService
         _walletTransactionService = walletTransactionService;
     }
 
-    public Task<Wallet> CreateAsync(Wallet model)
+    public async Task<Wallet> CreateAsync(Wallet model)
     {
-        return _walletRepository.CreateAsync(model);
+        var wallet = await _walletRepository.CreateAsync(model);
+        return wallet;
     }
 
     public async Task AddFundsAsync(int userId, decimal value)

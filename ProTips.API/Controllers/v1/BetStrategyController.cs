@@ -24,7 +24,7 @@ public class BetStrategyController : ControllerBase
     /// <param name="betStrategy"></param>
     /// <returns>Brand new created strategy</returns>
     [HttpPost]
-    public async Task<ActionResult<BetStrategy>> Post([FromBody] BetStrategy betStrategy)
+    public async Task<ActionResult<BetStrategy>> Post([FromBody] BetStrategyDto betStrategy)
     {
         var newBetStrategy = await _betStrategyService.CreateAsync(betStrategy);
         return Ok(newBetStrategy);

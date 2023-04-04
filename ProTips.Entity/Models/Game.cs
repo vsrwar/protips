@@ -11,5 +11,5 @@ public class Game : Base
     [JsonIgnore] public int? ResultId { get; set; }
     public Result? Result { get; set; }
     public DateTime Date { get; set; }
-    public List<Link> Links { get; set; }
+    public ICollection<Link> Links { get; set; }
 }

@@ -30,6 +30,9 @@ public static class ServicesExtensionMethod
         services.AddScoped<IUserService, UserService>();
         services.AddScoped<IWalletService, WalletService>();
         services.AddScoped<IWalletTransactionService, WalletTransactionService>();
+        services.AddScoped<ICurrencyService, CurrencyService>();
+        services.AddScoped<IPreLiveService, PreLiveService>();
+        services.AddScoped<ITipService, TipService>();
     }
     
     public static void AddRepositories(this IServiceCollection services)
@@ -45,6 +48,9 @@ public static class ServicesExtensionMethod
         services.AddTransient<IUserRepository, UserRepository>();
         services.AddTransient<IWalletRepository, WalletRepository>();
         services.AddTransient<IWalletTransactionRepository, WalletTransactionRepository>();
+        services.AddTransient<ICurrencyRepository, CurrencyRepository>();
+        services.AddTransient<IPreLiveRepository, PreLiveRepository>();
+        services.AddTransient<ITipRepository, TipRepository>();
     }
     
     public static void AddVersioning(this IServiceCollection services)

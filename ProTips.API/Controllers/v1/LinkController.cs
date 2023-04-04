@@ -24,7 +24,7 @@ public class LinkController : ControllerBase
     /// <param name="link"></param>
     /// <returns>Brand new created link</returns>
     [HttpPost]
-    public async Task<ActionResult<Link>> Post([FromBody] Link link)
+    public async Task<ActionResult<Link>> Post([FromBody] LinkDto link)
     {
         var newLink = await _linkService.CreateAsync(link);
         return Ok(newLink);

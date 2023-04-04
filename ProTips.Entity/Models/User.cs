@@ -9,5 +9,5 @@ public class User : Base
     [JsonIgnore] public string Password { get; set; }
     [JsonIgnore] public int WalletId { get; set; }
     public Wallet Wallet { get; set; }
-    public List<Bet> Bets { get; set; }
+    public ICollection<Bet> Bets { get; set; }
 }

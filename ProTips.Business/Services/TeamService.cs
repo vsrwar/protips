@@ -15,10 +15,11 @@ public class TeamService : ITeamService
         _teamRepository = teamRepository;
     }
 
-    public Task<Team> CreateAsync(TeamDto model)
+    public async Task<Team> CreateAsync(TeamDto model)
     {
         var team = ObjectMapper.Mapper.Map<Team>(model);
-        return _teamRepository.CreateAsync(team);
+        await _teamRepository.CreateAsync(team);
+        return team;
     }
 
     public async Task<List<Team>> GetAsync()

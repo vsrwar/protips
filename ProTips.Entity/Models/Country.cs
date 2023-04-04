@@ -2,6 +2,7 @@
 
 public class Country : Base
 {
-    public List<Team> Teams { get; set; }
-    public List<League> Leagues { get; set; }
+    public ICollection<Team> Teams { get; set; }
+    public ICollection<League> Leagues { get; set; }
+    public string Image { get; set; }
 }

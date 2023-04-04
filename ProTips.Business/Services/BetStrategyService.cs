@@ -16,10 +16,11 @@ public class BetStrategyService : IBetStrategyService
         _betStrategyRepository = betStrategyRepository;
     }
 
-    public async Task<BetStrategy> CreateAsync(BetStrategy model)
+    public async Task<BetStrategy> CreateAsync(BetStrategyDto model)
     {
-        await _betStrategyRepository.CreateAsync(model);
-        return model;
+        var strategy = ObjectMapper.Mapper.Map<BetStrategy>(model);
+        await _betStrategyRepository.CreateAsync(strategy);
+        return strategy;
     }
 
     public async Task<List<BetStrategy>> GetAsync()

@@ -31,7 +31,8 @@ public class ErrorHandler
         var errorResponse = new ErrorResponse
         {
             StatusCode = HttpStatusCode.InternalServerError,
-            Message = exception.Message
+            Message = exception.Message,
+            Exception = exception.InnerException
         };
 
         _log.LogError($"Error: {exception.Message}");

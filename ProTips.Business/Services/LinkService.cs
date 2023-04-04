@@ -16,10 +16,11 @@ public class LinkService : ILinkService
         _linkRepository = linkRepository;
     }
 
-    public async Task<Link> CreateAsync(Link model)
+    public async Task<Link> CreateAsync(LinkDto model)
     {
-        await _linkRepository.CreateAsync(model);
-        return model;
+        var link = ObjectMapper.Mapper.Map<Link>(model);
+        await _linkRepository.CreateAsync(link);
+        return link;
     }
 
     public async Task<List<Link>> CreateRangeAsync(List<Link> model)

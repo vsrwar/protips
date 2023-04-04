@@ -3,5 +3,6 @@
 public class League : Base
 {
     public int CountryId { get; set; }
-    public List<Team> Teams { get; set; }
+    public ICollection<Team> Teams { get; set; }
+    public string Image { get; set; }
 }

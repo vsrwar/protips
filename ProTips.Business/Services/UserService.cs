@@ -18,7 +18,7 @@ public class UserService : IUserService
     public async Task<User> CreateAsync(UserDto model)
     {
         var user = ObjectMapper.Mapper.Map<User>(model);
-        user.Wallet = new Wallet();
+        user.Wallet = new Wallet() {CurrencyId = model.CurrencyId};
         await _userRepository.CreateAsync(user);
         user.WalletId = user.Wallet.Id;
         await _userRepository.UpdateAsync(user);
@@ -27,12 +27,12 @@ public class UserService : IUserService
 
     public async Task<List<User>> GetAsync()
     {
-        return await _userRepository.GetAsync("Wallet", "Wallet.Transactions");
+        return await _userRepository.GetAsync("Wallet", "Wallet.Transactions", "Wallet.Currency");
     }
 
     public async Task<User> GetAsync(int id)
     {
-        return await _userRepository.GetAsync(id, "Wallet", "Wallet.Transactions");
+        return await _userRepository.GetAsync(id, "Wallet", "Wallet.Transactions", "Wallet.Currency");
     }
 
     public async Task<User> UpdateAsync(User model)

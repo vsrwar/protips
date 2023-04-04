@@ -17,16 +17,36 @@ public abstract class Repository<T> : IRepository<T> where T : Base
     
     public async Task<T> CreateAsync(T model)
     {
-        await Context.AddAsync(model);
-        await Context.SaveChangesAsync();
-        return model;
+        using var transaction = Context.Database.BeginTransaction();
+        try
+        {
+            await Context.AddAsync(model);
+            await Context.SaveChangesAsync();
+            transaction.Commit();
+            
+            return model;
+        }
+        catch
+        {
+            await transaction.RollbackAsync();
+            throw;
+        }
     }
 
     public async Task<List<T>> CreateRangeAsync(List<T> model)
     {
-        await Context.AddRangeAsync(model);
-        await Context.SaveChangesAsync();
-        return model;
+        using var transaction = Context.Database.BeginTransaction();
+        try
+        {
+            await Context.AddRangeAsync(model);
+            await Context.SaveChangesAsync();
+            return model;
+        }
+        catch
+        {
+            await transaction.RollbackAsync();
+            throw;
+        }
     }
 
     public async Task<List<T>> GetAsync(params string[] includes) =>
@@ -46,21 +66,39 @@ public abstract class Repository<T> : IRepository<T> where T : Base
 
     public async Task<T> UpdateAsync(T model)
     {
-        Context.Update(model);
-        await Context.SaveChangesAsync();
-        return model;
+        using var transaction = Context.Database.BeginTransaction();
+        try
+        {
+            Context.Update(model);
+            await Context.SaveChangesAsync();
+            return model;
+        }
+        catch
+        {
+            await transaction.RollbackAsync();
+            throw;
+        }
     }
 
     public async Task<bool> DeleteAsync(int id)
     {
-        var model = await GetAsync(id);
-        if (model == null)
+        using var transaction = Context.Database.BeginTransaction();
+        try
         {
-            return false;
-        }
+            var model = await GetAsync(id);
+            if (model == null)
+            {
+                return false;
+            }
         
-        model.DeletedDate = DateTime.UtcNow;
-        await UpdateAsync(model);
-        return true;
+            model.DeletedDate = DateTime.UtcNow;
+            await UpdateAsync(model);
+            return true;
+        }
+        catch
+        {
+            await transaction.RollbackAsync();
+            throw;
+        }
     }
 }

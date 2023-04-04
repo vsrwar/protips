@@ -1,8 +1,9 @@
-﻿using ProTips.Entity.Models;
+﻿using ProTips.Business.Dtos;
+using ProTips.Entity.Models;
 
 namespace ProTips.Business.Services.Interfaces;
 
 public interface IBetStrategyService : IService<BetStrategy>
 {
-    Task<BetStrategy> CreateAsync(BetStrategy model);
+    Task<BetStrategy> CreateAsync(BetStrategyDto model);
 }
