@@ -22,6 +22,7 @@ public class PreLive : Base
     public decimal AvgUnder3_5GoalsAway { get; set; }
     public decimal AvgGoalsMomentHome { get; set; }
     public decimal AvgGoalsMomentAway { get; set; }
+    public string Comment { get; set; }
     public string PossibleResults { get; set; }
     public decimal AvgBothTeamsToScoreHome { get; set; }
     public decimal AvgBothTeamsToScoreAway { get; set; }

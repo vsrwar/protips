@@ -26,4 +26,6 @@ dotnet ef --startup-project ./ProTips.API/ --project ./ProTips.Entity/ migration
 
 ## To run the project:
   - Ensure docker is installed
-  - docker-compose up -d --build
+```shell
+docker-compose up -d --build
+```

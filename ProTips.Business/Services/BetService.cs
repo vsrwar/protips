@@ -42,11 +42,11 @@ public class BetService : IBetService
         return bet;
     }
 
-    public async Task<Bet> WinnerAsync(int id, bool winner)
+    public async Task<Bet> WinnerAsync(int id, bool winner, decimal? value)
     {
         var bet = await _betRepository.GetAsync(id);
         bet.Winner = winner;
-        bet.CalculateResult(winner);
+        bet.CalculateResult(winner, value);
         
         await _walletService.AddBetResultAsync(bet.UserId, bet.Result);
         

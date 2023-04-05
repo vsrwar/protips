@@ -26,6 +26,17 @@ services:
       - MYSQL_CONNECTION_STRING=Server=mysql;Database=protips;Uid=vinicius;Pwd=Senh@123!
     depends_on:
       - db
+  ui:
+    container_name: "ui"
+    build:
+      context: "./protips.ui"
+      dockerfile: Dockerfile
+    ports:
+      - "3000:80"
+      - "3001:443"
+    restart: always
+    depends_on:
+      - api
   portainer:
     image: portainer/portainer-ce
     container_name: "Portainer"

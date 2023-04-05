@@ -7,5 +7,5 @@ namespace ProTips.Business.Services.Interfaces;
 public interface IBetService : IService<Bet>
 {
     Task<Bet> CreateAsync(BetDto model);
-    Task<Bet> WinnerAsync(int id, bool winner);
+    Task<Bet> WinnerAsync(int id, bool winner, decimal? value);
 }

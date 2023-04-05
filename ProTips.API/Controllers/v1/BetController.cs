@@ -89,9 +89,10 @@ public class BetController : ControllerBase
     [HttpPost("{id:int}/winner/{winner:bool}")]
     public async Task<ActionResult<Bet>> Winner(
         [FromRoute] int id,
-        [FromRoute] bool winner)
+        [FromRoute] bool winner,
+        [FromQuery] decimal? value = null)
     {
-        var bet = await _betService.WinnerAsync(id, winner);
+        var bet = await _betService.WinnerAsync(id, winner, value);
         return Ok(bet);
     }
 }

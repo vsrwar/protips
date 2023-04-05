@@ -475,3 +475,31 @@ $RECYCLE.BIN/
 
 # Windows shortcuts
 *.lnk
+
+# UI:
+# Logs
+protips/logs
+protips/*.log
+protips/npm-debug.log*
+protips/yarn-debug.log*
+protips/yarn-error.log*
+protips/pnpm-debug.log*
+protips/lerna-debug.log*
+
+protips/node_modules
+protips/.DS_Store
+protips/dist
+protips/dist-ssr
+protips/coverage
+protips/*.local
+
+protips/cypress/videos/
+protips/cypress/screenshots/
+
+# Editor directories and files
+protips/.idea
+protips/*.suo
+protips/*.ntvs*
+protips/*.njsproj
+protips/*.sln
+protips/*.sw?

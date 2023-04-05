@@ -14,9 +14,16 @@ public class Bet : Base
     [JsonIgnore] public int StrategyId { get; set; }
     public BetStrategy BetStrategy { get; set; }
 
-    public void CalculateResult(bool winner)
+    public void CalculateResult(bool winner, decimal? value)
     {
-        Result = winner ? Value * Odd - Value : -Value;
+        if (winner)
+        {
+            Result = value.HasValue ? value.Value : Value * Odd - Value;    
+        }
+        else
+        {
+            Result = -Value;
+        }
     }
 
     public void GenerateName(Game game, BetStrategy betStrategy)

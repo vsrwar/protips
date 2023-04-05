@@ -200,6 +200,7 @@ public class MySqlContext : DbContext
             mb.Property(x => x.AvgUnder3_5GoalsAway).HasColumnName("avgUnder3_5GoalsAway").HasColumnType("DECIMAL(4, 2)");
             mb.Property(x => x.AvgGoalsMomentHome).HasColumnName("avgGoalsMomentHome").HasColumnType("DECIMAL(4, 2)");
             mb.Property(x => x.AvgGoalsMomentAway).HasColumnName("avgGoalsMomentAway").HasColumnType("DECIMAL(4, 2)");
+            mb.Property(x => x.Comment).HasColumnName("comment");
             mb.Property(x => x.PossibleResults).HasColumnName("possibleResults");
             mb.Property(x => x.AvgBothTeamsToScoreHome).HasColumnName("avgBothTeamsToScoreHome").HasColumnType("DECIMAL(4, 2)");
             mb.Property(x => x.AvgBothTeamsToScoreAway).HasColumnName("avgBothTeamsToScoreAway").HasColumnType("DECIMAL(4, 2)");
