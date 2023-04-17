@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using ProTips.Business.Services.Interfaces;
 
 namespace ProTips.API.Controllers.v1;
@@ -7,6 +8,7 @@ namespace ProTips.API.Controllers.v1;
 [ApiVersion("1")]
 [Route("api/v{version:apiVersion}/[controller]")]
 [Produces("application/json")]
+[Authorize]
 public class WalletController : ControllerBase
 {
     private readonly IWalletService _walletService;

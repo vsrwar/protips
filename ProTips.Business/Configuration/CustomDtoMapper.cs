@@ -47,5 +47,8 @@ public class CustomDtoMapper : Profile
 
         CreateMap<UserDto, User>()
             .ReverseMap();
+
+        CreateMap<User, UserAuthenticated>()
+            .ReverseMap();
     }
 }

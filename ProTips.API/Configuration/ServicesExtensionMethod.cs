@@ -1,9 +1,11 @@
-﻿using Microsoft.AspNetCore.Mvc.Versioning;
+﻿using System.Text;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Mvc.Versioning;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
 using ProTips.Business.Services;
 using ProTips.Business.Services.Interfaces;
 using ProTips.Entity.Database;
-using ProTips.Entity.Models;
 using ProTips.Entity.Repository;
 using ProTips.Entity.Repository.Interfaces;
 
@@ -33,6 +35,9 @@ public static class ServicesExtensionMethod
         services.AddScoped<ICurrencyService, CurrencyService>();
         services.AddScoped<IPreLiveService, PreLiveService>();
         services.AddScoped<ITipService, TipService>();
+        
+        services.AddScoped<ILoginService, LoginService>();
+        services.AddScoped<IJwtProvider, JwtProvider>();
     }
     
     public static void AddRepositories(this IServiceCollection services)
@@ -70,5 +75,29 @@ public static class ServicesExtensionMethod
             p.GroupNameFormat = "'v'VVV";
             p.SubstituteApiVersionInUrl = true;
         });
+    }
+    
+    public static void AddAuth(this IServiceCollection services, string issuer, string audience, string secretKey)
+    {
+        services.ConfigureOptions<JwtOptionsSetup>();
+        
+        services.AddAuthentication(options => {
+                options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+            })
+            .AddCookie()
+            .AddJwtBearer(options =>
+            {
+                options.TokenValidationParameters = new()
+                {
+                    ValidateIssuer = true,
+                    ValidateAudience = true,
+                    ValidateLifetime = true,
+                    ValidateIssuerSigningKey = true,
+                    ValidIssuer = issuer,
+                    ValidAudience = audience,
+                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(secretKey))
+                };
+            });
     }
 }

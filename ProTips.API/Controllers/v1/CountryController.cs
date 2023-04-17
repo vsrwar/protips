@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using ProTips.Business.Dtos;
 using ProTips.Business.Services.Interfaces;
 using ProTips.Entity.Models;
@@ -9,6 +10,7 @@ namespace ProTips.API.Controllers.v1;
 [ApiVersion("1")]
 [Route("api/v{version:apiVersion}/[controller]")]
 [Produces("application/json")]
+[Authorize]
 public class CountryController : ControllerBase
 {
     private readonly ICountryService _countryService;

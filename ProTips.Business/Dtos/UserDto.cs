@@ -8,4 +8,9 @@ public class UserDto
     public string Password { get; set; }
     public string ConfirmationPassword { get; set; }
     public int CurrencyId { get; set; }
+    
+    public bool HasValidConfirmationPassword()
+    {
+        return Password == ConfirmationPassword;
+    }
 }
